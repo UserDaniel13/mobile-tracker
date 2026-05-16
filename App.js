@@ -10,6 +10,16 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [habits, setHabits] = useState([]);
 
+  const addHabit = (title) => {
+    const newHabit = {
+      id: Date.now().toString(),
+      title: title,
+      completed: false,
+    };
+
+    setHabits((currentHabits) => [...currentHabits, newHabit]);
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -32,6 +42,7 @@ export default function App() {
           {(props) => (
             <AddHabitScreen
               {...props}
+              onAddHabit={addHabit}
             />
           )}
         </Stack.Screen>
