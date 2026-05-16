@@ -1,3 +1,4 @@
+// screens/HabitsScreen.js
 import React from 'react';
 import {
   View,
@@ -7,7 +8,11 @@ import {
   StyleSheet,
 } from 'react-native';
 
-export default function HabitsScreen({ navigation, habits }) {
+export default function HabitsScreen({
+  navigation,
+  habits,
+  onToggleHabit,
+}) {
   return (
     <View style={styles.container}>
       <Button
@@ -26,9 +31,19 @@ export default function HabitsScreen({ navigation, habits }) {
           contentContainerStyle={styles.list}
           renderItem={({ item }) => (
             <View style={styles.habitItem}>
-              <Text style={styles.habitTitle}>
+              <Text
+                style={[
+                  styles.habitTitle,
+                  item.completed && styles.completedHabit,
+                ]}
+              >
                 {item.title}
               </Text>
+
+              <Button
+                title={item.completed ? 'Выполнено' : 'Отметить'}
+                onPress={() => onToggleHabit(item.id)}
+              />
             </View>
           )}
         />
@@ -62,5 +77,10 @@ const styles = StyleSheet.create({
   },
   habitTitle: {
     fontSize: 18,
+    marginBottom: 10,
+  },
+  completedHabit: {
+    textDecorationLine: 'line-through',
+    color: '#4caf50',
   },
 });
