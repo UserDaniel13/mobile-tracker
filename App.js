@@ -63,6 +63,12 @@ export default function App() {
     );
   };
 
+  const deleteHabit = (id) => {
+    setHabits((currentHabits) =>
+      currentHabits.filter((habit) => habit.id !== id)
+    );
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -75,6 +81,7 @@ export default function App() {
               {...props}
               habits={habits}
               onToggleHabit={toggleHabit}
+              onDeleteHabit={deleteHabit}
             />
           )}
         </Stack.Screen>

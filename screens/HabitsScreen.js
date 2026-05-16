@@ -12,6 +12,7 @@ export default function HabitsScreen({
   navigation,
   habits,
   onToggleHabit,
+  onDeleteHabit,
 }) {
   return (
     <View style={styles.container}>
@@ -40,10 +41,18 @@ export default function HabitsScreen({
                 {item.title}
               </Text>
 
-              <Button
-                title={item.completed ? 'Выполнено' : 'Отметить'}
-                onPress={() => onToggleHabit(item.id)}
-              />
+              <View style={styles.buttons}>
+                <Button
+                  title={item.completed ? 'Выполнено' : 'Отметить'}
+                  onPress={() => onToggleHabit(item.id)}
+                />
+
+                <Button
+                  title="Удалить"
+                  color="#d32f2f"
+                  onPress={() => onDeleteHabit(item.id)}
+                />
+              </View>
             </View>
           )}
         />
@@ -82,5 +91,8 @@ const styles = StyleSheet.create({
   completedHabit: {
     textDecorationLine: 'line-through',
     color: '#4caf50',
+  },
+  buttons: {
+    gap: 8,
   },
 });
